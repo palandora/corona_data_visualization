@@ -37,10 +37,17 @@ body {
 
 .wrapper {
   max-width: 1024px;
-  width: 100%;
 }
 
-.wrapper .nav .header {
+.wrapper nav {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 2;
+  top: -1px;
+  background: #bfbfbf;
+}
+
+.wrapper nav .header {
   padding: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -55,7 +62,7 @@ body {
   border-bottom: 1px solid #cecece;
 }
 
-.wrapper .nav .header .pageTitle {
+.wrapper nav .header .pageTitle {
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,13 +77,13 @@ body {
       flex-wrap: wrap;
 }
 
-.wrapper .nav .header .pageTitle .projectTitle {
+.wrapper nav .header .pageTitle .projectTitle {
   block-size: -webkit-fit-content;
   block-size: -moz-fit-content;
   block-size: fit-content;
 }
 
-.wrapper .nav .header .filter {
+.wrapper nav .header .filter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -88,12 +95,12 @@ body {
           align-items: center;
 }
 
-.wrapper .nav .header .filter .currentDate, .wrapper .nav .header .filter .seperator, .wrapper .nav .header .filter .currentFilter {
+.wrapper nav .header .filter .currentDate, .wrapper nav .header .filter .seperator, .wrapper nav .header .filter .currentFilter {
   display: inline-block;
   margin-left: 4px;
 }
 
-.wrapper .nav .details {
+.wrapper nav .details {
   padding: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -101,22 +108,22 @@ body {
   border-bottom: 1px solid #cecece;
 }
 
-.wrapper .nav .details .content span {
+.wrapper nav .details .content span {
   display: block;
 }
 
-.wrapper .nav .details .content.left {
+.wrapper nav .details .content.left {
   padding-right: 24px;
 }
 
 @media screen and (max-width: 650px) {
-  .wrapper .nav .details {
+  .wrapper nav .details {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .wrapper .nav .details .content.left {
+  .wrapper nav .details .content.left {
     padding-bottom: 16px;
   }
 }
@@ -124,6 +131,82 @@ body {
 .wrapper .countries {
   display: -ms-grid;
   display: grid;
+  -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-rows: 160px;
+}
+
+.wrapper .countries .country {
+  background: #bfbfbf;
+  outline: 1px solid #cecece;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.wrapper .countries .country .graph {
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  width: 80px;
   height: 80px;
-  outline: 1px solid lime;
+  border-radius: 40px;
+}
+
+.wrapper .countries .country .graph .progress {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+  -webkit-filter: blur(14px);
+          filter: blur(14px);
+  background: #ff9330;
+}
+
+.wrapper .countries .country .label {
+  margin-top: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .countries .country .label .wrapperCounter {
+  color: rgba(255, 255, 255, 0.64);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.wrapper .countries .country:hover {
+  background: #cfcfcf;
+}
+
+.wrapper footer {
+  padding: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: inset 0 1px 0 #ddd;
+          box-shadow: inset 0 1px 0 #ddd;
 }

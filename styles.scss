@@ -10,6 +10,7 @@ $primary: #ff9330;
 $bg: #bfbfbf;
 $divider: #cecece;
 $bounds_pg: rgba(255,255,255,.2);
+$hover: #cfcfcf;
 //STATE-CASES
 $cases_new: #fff730;
 $cases_active: $primary;
@@ -51,8 +52,11 @@ body{
 
 .wrapper{
     max-width: 1024px;
-    width: 100%;
-    .nav{
+    nav{
+        position: sticky;
+        z-index: 2;
+        top: -1px;
+        background: $bg;
         .header{
             padding: 16px;
             display: flex;
@@ -105,7 +109,53 @@ body{
     }
     .countries{
         display: grid;
-        height: 80px;
-        outline: 1px solid lime;
+        grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+        grid-auto-rows: 160px;
+        .country{
+            background: $bg;
+            outline: 1px solid $divider;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .graph{
+                overflow: hidden;
+                $dimensions: 80px;
+                background: $bounds_pg;
+                width: $dimensions;
+                height: $dimensions;
+                border-radius: $dimensions/2;
+                .progress{
+                    width: $dimensions;
+                    height: $dimensions;
+                    border-radius: $dimensions/2;
+                    transform: scale(.5);
+                    filter: blur(14px);
+                    background: $primary;
+                }
+            }
+            .label{
+                margin-top: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .wrapperCounter{
+                    color: $fc_captions;
+                    display: flex;
+                }
+            }
+            &:hover{
+                background: $hover;
+            }
+        }
     }
+    footer{
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: inset 0 1px 0 #ddd;
+
+    }
+
 }
