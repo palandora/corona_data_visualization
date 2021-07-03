@@ -1,4 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap');
+
+//FONT
+$fw_medium: 500;
+$fw_bold: 700;
+$fc_headings: #fff;
+$fc_captions: rgba(255,255,255,.64);
+//UI
+$primary: #ff9330;
+$bg: #bfbfbf;
+$divider: #cecece;
+$bounds_pg: rgba(255,255,255,.2);
+//STATE-CASES
+$cases_new: #fff730;
+$cases_active: $primary;
+$cases_critical: #ff4930;
+$cases_recovered: #7fff30;
+$cases_total: $bounds_pg;
+//STATE-DEATHS
+$deaths_new: #fff;
+$deaths_total: #000;
+
 *{
     box-sizing: border-box;
     margin: 0;
+}
+
+body{
+    height: 100vh;
+    background: $bg;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font: {
+        family: 'IBM Plex Mono', monospace;
+        weight: $fw_medium;
+        size: 14px;
+    }
+    color: $fc_headings;
+}
+
+.seperator{
+    $dimensions: 6px;
+    width: $dimensions;
+    height: $dimensions;
+    border-radius: $dimensions/2;
+    background: $fc_headings;
+    margin-bottom: 2px;
+}
+
+.wrapper{
+    max-width: 1024px;
+    width: 100%;
+    .nav{
+        .header{
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-weight: $fw_bold;
+            border-bottom: 1px solid $divider;
+            .pageTitle{
+                width: 50%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: wrap;
+                .projectTitle{
+                    block-size: fit-content;
+                }
+            }
+            .filter{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                .currentDate,.seperator,.currentFilter{
+                    display: inline-block;
+                    margin-left: 4px;
+                }
+            }
+        }
+        .details{
+            padding: 16px;
+            display: flex;
+            border-bottom: 1px solid $divider;
+            .content{
+                span{
+                    display: block;
+                }
+                &.left{
+                    padding-right: 24px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            .details {
+                flex-direction: column;
+                .content.left{
+                    padding-bottom: 16px;
+                }
+            }
+        }
+    }
+    .countries{
+        display: grid;
+        height: 80px;
+        outline: 1px solid lime;
+    }
 }
