@@ -29,10 +29,7 @@ $deaths_total: #000;
 body{
     height: 100vh;
     background: $bg;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    position: relative;
     font: {
         family: 'IBM Plex Mono', monospace;
         weight: $fw_medium;
@@ -47,11 +44,41 @@ body{
     height: $dimensions;
     border-radius: $dimensions/2;
     background: $fc_headings;
-    margin-bottom: 2px;
+}
+
+.toggle{
+    cursor: pointer;
+    position: relative;
+    width: 34px;
+    height: 22px;
+    border: 2px solid $bg;
+    background: white;
+    border-radius: 16px;
+    transition: border .25s ease-in-out;
+    .knob{
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        border-radius: 8px;
+        background: $primary;
+        transition: left .25s ease-in-out, background .25s ease-in-out;
+    }
+    &:hover{
+        border: 2px solid #969696;
+        .knob{
+            left: 14px;
+            background: #000;
+        }
+    }
 }
 
 .wrapper{
-    max-width: 1024px;
+    max-width: 1440px;
+    margin: 0 auto;
+    outline: 1px solid $divider;
     nav{
         position: sticky;
         z-index: 2;
@@ -67,18 +94,20 @@ body{
             .pageTitle{
                 width: 50%;
                 display: flex;
-                justify-content: flex-start;
                 align-items: center;
                 flex-wrap: wrap;
                 .projectTitle{
                     block-size: fit-content;
+                }
+                .projectTitle,.country{
+                    margin-right: 4px;
                 }
             }
             .filter{
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
-                .currentDate,.seperator,.currentFilter{
+                .seperator,.currentFilter,.toggle{
                     display: inline-block;
                     margin-left: 4px;
                 }
@@ -107,18 +136,20 @@ body{
             }
         }
     }
+
     .countries{
         display: grid;
         grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
         grid-auto-rows: 160px;
+        outline: 1px solid $divider;
         .country{
+            cursor: pointer;
             background: $bg;
             outline: 1px solid $divider;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
             .graph{
                 overflow: hidden;
                 $dimensions: 80px;
@@ -154,8 +185,7 @@ body{
         padding: 16px;
         display: flex;
         justify-content: space-between;
-        box-shadow: inset 0 1px 0 #ddd;
-
     }
 
 }
+
