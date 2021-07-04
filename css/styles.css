@@ -21,12 +21,12 @@
 
 body {
   height: 100vh;
-  background: #bfbfbf;
+  background: var(--bg);
   position: relative;
   font-family: 'IBM Plex Mono', monospace;
-  font-weight: 500;
+  font-weight: var(--fw_medium);
   font-size: 14px;
-  color: #fff;
+  color: var(--fc_headings);
 }
 
 body.light {
@@ -49,7 +49,7 @@ body.dark {
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background: #fff;
+  background: var(--fc_headings);
 }
 
 .toggle {
@@ -57,7 +57,7 @@ body.dark {
   position: relative;
   width: 34px;
   height: 22px;
-  border: 2px solid #ff9330;
+  border: 2px solid var(--primary);
   background: white;
   border-radius: 16px;
   -webkit-transition: border .25s ease-in-out;
@@ -73,16 +73,16 @@ body.dark {
   width: 14px;
   height: 14px;
   border-radius: 8px;
-  background: #ff9330;
+  background: var(--primary);
   -webkit-transition: left .25s ease-in-out, background .25s ease-in-out;
   transition: left .25s ease-in-out, background .25s ease-in-out;
 }
 
-.toggle:hover {
+.toggle.active {
   border: 2px solid #969696;
 }
 
-.toggle:hover .knob {
+.toggle.active .knob {
   left: 14px;
   background: #000;
 }
@@ -90,7 +90,7 @@ body.dark {
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
-  outline: 1px solid rgba(255, 255, 255, 0.16);
+  outline: 1px solid var(--divider);
 }
 
 .wrapper nav {
@@ -98,7 +98,7 @@ body.dark {
   position: sticky;
   z-index: 2;
   top: -1px;
-  background: #ff9330;
+  background: var(--primary);
 }
 
 .wrapper nav .header {
@@ -112,8 +112,8 @@ body.dark {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  font-weight: 700;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  font-weight: var(--fw_bold);
+  border-bottom: 1px solid var(--divider);
 }
 
 .wrapper nav .header .pageTitle {
@@ -188,13 +188,13 @@ body.dark {
   -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-auto-rows: 160px;
-  outline: 1px solid rgba(255, 255, 255, 0.16);
+  outline: 1px solid var(--divider);
 }
 
 .wrapper .countries .country {
   cursor: pointer;
-  background: #bfbfbf;
-  outline: 1px solid rgba(255, 255, 255, 0.16);
+  background: var(--bg);
+  outline: 1px solid var(--divider);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -212,7 +212,7 @@ body.dark {
 
 .wrapper .countries .country .graph {
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--bounds_pg);
   width: 80px;
   height: 80px;
   border-radius: 40px;
@@ -226,7 +226,7 @@ body.dark {
           transform: scale(0.5);
   -webkit-filter: blur(14px);
           filter: blur(14px);
-  background: #ff9330;
+  background: var(--primary);
 }
 
 .wrapper .countries .country .label {
@@ -244,14 +244,14 @@ body.dark {
 }
 
 .wrapper .countries .country .label .wrapperCounter {
-  color: rgba(255, 255, 255, 0.64);
+  color: var(--fc_captions);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
 .wrapper .countries .country:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--hover);
 }
 
 .wrapper footer {
