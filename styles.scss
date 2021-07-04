@@ -7,7 +7,6 @@
     --fc_headings: #fff;
     --fc_captions: rgba(255,255,255,.64);
     //UI
-    --primary: #ff9330;
     --divider: rgba(255,255,255,.16);
     --hover: rgba(255,255,255,.12);
     //CASES
@@ -34,6 +33,7 @@ body{
     color: var(--fc_headings);
     &.light{
         //UI
+        --primary: #ff9330;
         --bg: #bfbfbf;
         --bounds_pg: rgba(255,255,255,.2);
         //CASES
@@ -44,6 +44,7 @@ body{
     }
     &.dark{
         //UI
+        --primary: #fff;
         --bg: #1d1d1d;
         --bounds_pg: var(--bg);
         //CASES
@@ -115,8 +116,13 @@ body{
                 .projectTitle{
                     block-size: fit-content;
                 }
+                .toggleDetails{
+                    cursor: pointer;
+                    transform: rotate(0deg);
+                    transition: transform .5s;
+                }
                 .projectTitle,.country{
-                    margin-right: 4px;
+                    margin-right: 2px;
                 }
             }
             .filter{
@@ -131,7 +137,7 @@ body{
         }
         .details{
             padding: 16px;
-            display: flex;
+            display: none;
             .content{
                 span{
                     display: block;
