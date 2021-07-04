@@ -1,4 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&display=swap");
+:root {
+  --fw_medium: 500;
+  --fw_bold: 700;
+  --fc_headings: #fff;
+  --fc_captions: rgba(255,255,255,.64);
+  --primary: #ff9330;
+  --divider: rgba(255,255,255,.16);
+  --hover: rgba(255,255,255,.12);
+  --cases_new: #fff730;
+  --cases_active: #ff9330;
+  --cases_critical: #ff4930;
+  --cases_recovered: #7fff30;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -15,6 +29,22 @@ body {
   color: #fff;
 }
 
+body.light {
+  --bg: #bfbfbf;
+  --bounds_pg: rgba(255,255,255,.2);
+  --cases-total: var(--bounds_pg);
+  --deaths_new: #fff;
+  --deaths_total: #000;
+}
+
+body.dark {
+  --bg: #1d1d1d;
+  --bounds_pg: var(--bg);
+  --cases_total: rgba(255,255,255,.32);
+  --deaths_new: #fff;
+  --deaths_total: #fff;
+}
+
 .seperator {
   width: 6px;
   height: 6px;
@@ -27,7 +57,7 @@ body {
   position: relative;
   width: 34px;
   height: 22px;
-  border: 2px solid #bfbfbf;
+  border: 2px solid #ff9330;
   background: white;
   border-radius: 16px;
   -webkit-transition: border .25s ease-in-out;
@@ -60,7 +90,7 @@ body {
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
-  outline: 1px solid #cecece;
+  outline: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .wrapper nav {
@@ -68,7 +98,7 @@ body {
   position: sticky;
   z-index: 2;
   top: -1px;
-  background: #bfbfbf;
+  background: #ff9330;
 }
 
 .wrapper nav .header {
@@ -83,7 +113,7 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
   font-weight: 700;
-  border-bottom: 1px solid #cecece;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .wrapper nav .header .pageTitle {
@@ -130,7 +160,6 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #cecece;
 }
 
 .wrapper nav .details .content span {
@@ -159,13 +188,13 @@ body {
   -ms-grid-columns: (minmax(240px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-auto-rows: 160px;
-  outline: 1px solid #cecece;
+  outline: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .wrapper .countries .country {
   cursor: pointer;
   background: #bfbfbf;
-  outline: 1px solid #cecece;
+  outline: 1px solid rgba(255, 255, 255, 0.16);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -222,7 +251,7 @@ body {
 }
 
 .wrapper .countries .country:hover {
-  background: #cfcfcf;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .wrapper footer {

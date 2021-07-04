@@ -6,20 +6,37 @@ $fw_bold: 700;
 $fc_headings: #fff;
 $fc_captions: rgba(255,255,255,.64);
 //UI
-$primary: #ff9330;
 $bg: #bfbfbf;
-$divider: #cecece;
+$primary: #ff9330;
+$divider: rgba(255,255,255,.16);
 $bounds_pg: rgba(255,255,255,.2);
-$hover: #cfcfcf;
+$hover: rgba(255,255,255,.12);
 //STATE-CASES
 $cases_new: #fff730;
-$cases_active: $primary;
+$cases_active: #ff9330;
 $cases_critical: #ff4930;
 $cases_recovered: #7fff30;
 $cases_total: $bounds_pg;
 //STATE-DEATHS
 $deaths_new: #fff;
 $deaths_total: #000;
+
+:root{
+    //FONT
+    --fw_medium: 500;
+    --fw_bold: 700;
+    --fc_headings: #fff;
+    --fc_captions: rgba(255,255,255,.64);
+    //UI
+    --primary: #ff9330;
+    --divider: rgba(255,255,255,.16);
+    --hover: rgba(255,255,255,.12);
+    //CASES
+    --cases_new: #fff730;
+    --cases_active: #ff9330;
+    --cases_critical: #ff4930;
+    --cases_recovered: #7fff30;
+}
 
 *{
     box-sizing: border-box;
@@ -36,6 +53,26 @@ body{
         size: 14px;
     }
     color: $fc_headings;
+    &.light{
+        //UI
+        --bg: #bfbfbf;
+        --bounds_pg: rgba(255,255,255,.2);
+        //CASES
+        --cases-total: var(--bounds_pg);
+        //DEATHS
+        --deaths_new: #fff;
+        --deaths_total: #000;
+    }
+    &.dark{
+        //UI
+        --bg: #1d1d1d;
+        --bounds_pg: var(--bg);
+        //CASES
+        --cases_total: rgba(255,255,255,.32);
+        //DEATHS
+        --deaths_new: #fff;
+        --deaths_total: #fff;
+    }
 }
 
 .seperator{
@@ -51,7 +88,7 @@ body{
     position: relative;
     width: 34px;
     height: 22px;
-    border: 2px solid $bg;
+    border: 2px solid $primary;
     background: white;
     border-radius: 16px;
     transition: border .25s ease-in-out;
@@ -83,7 +120,7 @@ body{
         position: sticky;
         z-index: 2;
         top: -1px;
-        background: $bg;
+        background: $primary;
         .header{
             padding: 16px;
             display: flex;
@@ -116,7 +153,6 @@ body{
         .details{
             padding: 16px;
             display: flex;
-            border-bottom: 1px solid $divider;
             .content{
                 span{
                     display: block;
