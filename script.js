@@ -44,27 +44,37 @@ function showProjectDetails(){
     });
 }
 
-function createCountry(name){
+function toHTML(arrayCountries){
     const containerCountries = document.querySelector('.countries');
-    const country = document.createElement('div');
-    country.setAttribute('class','country');
-    country.innerHTML = `
-    <div class="graph">
-        <div class="progress"></div>
-    </div>
-    <div class="label">
-        <span class="countryTitle">${name}</span>
-        <div class="wrapperCounter">
-            <span class="labelCounter">Deaths:</span>
-            <span class="counter">20</span>
+    const htmlString = arrayCountries.map((country)=>{
+        return `
+        <div class="country">
+            <div class="graph">
+                <div class="progress"></div>
+            </div>
+            <div class="label">
+                <span class="countryTitle">${country.country}</span>
+                <div class="wrapperCounter">
+                    <span class="labelCounter">Deaths:</span>
+                    <span class="counter">${country.deaths.total}</span>
+                </div>
+            </div>
         </div>
-    </div>
-    `;
-    containerCountries.appendChild(country);
+        `;
+    }).join('');
+    containerCountries.innerHTML = htmlString;
 }
 
-function fetchCountryData(){
-    fetch("https://covid-193.p.rapidapi.com/countries", { 
+function sortBy(array,continent){
+    const sortedArray = [];
+    array.forEach((el)=>{
+        if(el.continent == `${continent}`) sortedArray.push(el);
+    }); 
+    return sortedArray;
+}
+
+function displayCountries(country){
+    fetch("https://covid-193.p.rapidapi.com/statistics", { 
         "method": "GET", 
         "headers": { 
             "x-rapidapi-key": "19a8b95264msh832c52455a1af68p1633e1jsnb88c59beb99a", 
@@ -75,15 +85,17 @@ function fetchCountryData(){
         return response.json();
     })
     .then(json =>{
-        json.response.forEach(country => {
-            createCountry(country);
+        console.log(json);
+        const sorted=json.response.sort((a, b) => {
+            return b.deaths.total - a.deaths.total;
         });
+        toHTML(sorted);
     })
     .catch(err => { 
         console.error(err); 
-    });
+    }); 
 }
 
 
-fetchCountryData();
+displayCountries('Europe');
 showProjectDetails();
