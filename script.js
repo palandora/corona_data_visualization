@@ -1,6 +1,24 @@
 let TOGGLE_CLICKED = false;
 let DETAILS_EXPANDED = false; 
 let countries = [];
+let continents = {
+    europe : [],
+    northAmerica : [],
+    southAmerica : [],
+    asia : [],
+    africa : [],
+};
+
+function sortAllCountries(obj){
+    helperArray = [];
+    Object.entries(obj).forEach((property)=>{
+        const sorted=property[1].sort((a, b) => {
+            return b.deaths.total - a.deaths.total;
+        });
+        helperArray.push(sorted);
+    });
+    return helperArray;
+}
 
 function toggle(){
     const toggle = document.querySelector('.toggle');
@@ -66,7 +84,7 @@ function toHTML(arrayCountries){
 }
 
 function sortBy(array,continent){
-    const sortedArray = [];
+    let sortedArray = [];
     array.forEach((el)=>{
         if(el.continent == `${continent}`) sortedArray.push(el);
     }); 
@@ -85,17 +103,40 @@ function displayCountries(country){
         return response.json();
     })
     .then(json =>{
-        console.log(json);
-        const sorted=json.response.sort((a, b) => {
-            return b.deaths.total - a.deaths.total;
+        //console.log(json.response,continents);
+        // const sorted=json.response.sort((a, b) => {
+        //     return b.deaths.total - a.deaths.total;
+        // });
+        json.response.forEach((country)=>{
+            switch (country.continent) {
+                case "Europe":
+                    continents.europe.push(country);
+                    break;
+                case "North-America":
+                    continents.northAmerica.push(country);
+                    break;
+                case "South-America":
+                    continents.southAmerica.push(country);
+                    break;
+                case "Asia":
+                    continents.asia.push(country);
+                    break;
+                case "Africa":
+                    continents.africa.push(country);
+                    break;
+            }
         });
-        toHTML(sorted);
+        
+        const sorted = sortAllCountries(continents);
+        //tbd 
+        //  iterate over entire array
+        //  after each group, add divider
+        toHTML(sorted[4]);
     })
     .catch(err => { 
         console.error(err); 
     }); 
 }
-
 
 displayCountries('Europe');
 showProjectDetails();
