@@ -1,19 +1,43 @@
 let TOGGLE_CLICKED = false;
 let DETAILS_EXPANDED = false; 
-let countries = [];
-let continents = {
-    europe : [],
-    northAmerica : [],
-    southAmerica : [],
-    asia : [],
-    africa : [],
-};
 
-function sortAllCountries(obj){
+
+
+function groupByContinent(obj){
+    let continents = {
+        europe : [],
+        northAmerica : [],
+        southAmerica : [],
+        asia : [],
+        africa : [],
+    };
+    obj.forEach((country)=>{
+        switch (country.continent) {
+            case "Europe":
+                continents.europe.push(country);
+                break;
+            case "North-America":
+                continents.northAmerica.push(country);
+                break;
+            case "South-America":
+                continents.southAmerica.push(country);
+                break;
+            case "Asia":
+                continents.asia.push(country);
+                break;
+            case "Africa":
+                continents.africa.push(country);
+                break;
+        }
+    });
+    return continents;
+}
+
+function sortingBy(array,type){
     helperArray = [];
-    Object.entries(obj).forEach((property)=>{
+    Object.entries(array).forEach((property)=>{
         const sorted=property[1].sort((a, b) => {
-            return b.deaths.total - a.deaths.total;
+            return b[type].total - a[type].total;
         });
         helperArray.push(sorted);
     });
@@ -62,25 +86,28 @@ function showProjectDetails(){
     });
 }
 
-function toHTML(arrayCountries){
+function toHTML(array){
     const containerCountries = document.querySelector('.countries');
-    const htmlString = arrayCountries.map((country)=>{
-        return `
-        <div class="country">
-            <div class="graph">
-                <div class="progress"></div>
-            </div>
-            <div class="label">
-                <span class="countryTitle">${country.country}</span>
-                <div class="wrapperCounter">
-                    <span class="labelCounter">Deaths:</span>
-                    <span class="counter">${country.deaths.total}</span>
-                </div>
-            </div>
-        </div>
-        `;
-    }).join('');
-    containerCountries.innerHTML = htmlString;
+    let html;
+    array.forEach(continent=>{
+        html += `<div class="divider">${continent[0].continent}</div>`;
+            html += continent.map(country=>{
+                return `
+                <div class="country">
+                    <div class="graph">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="label">
+                        <span class="countryTitle">${country.country}</span>
+                        <div class="wrapperCounter">
+                            <span class="labelCounter">Deaths:</span>
+                            <span class="counter">${country.deaths.total}</span>
+                        </div>
+                    </div>
+                </div>`
+            }).join('');
+    });
+    containerCountries.innerHTML = html;
 }
 
 function sortBy(array,continent){
@@ -91,7 +118,7 @@ function sortBy(array,continent){
     return sortedArray;
 }
 
-function displayCountries(country){
+function displayCountries(){
     fetch("https://covid-193.p.rapidapi.com/statistics", { 
         "method": "GET", 
         "headers": { 
@@ -103,40 +130,14 @@ function displayCountries(country){
         return response.json();
     })
     .then(json =>{
-        //console.log(json.response,continents);
-        // const sorted=json.response.sort((a, b) => {
-        //     return b.deaths.total - a.deaths.total;
-        // });
-        json.response.forEach((country)=>{
-            switch (country.continent) {
-                case "Europe":
-                    continents.europe.push(country);
-                    break;
-                case "North-America":
-                    continents.northAmerica.push(country);
-                    break;
-                case "South-America":
-                    continents.southAmerica.push(country);
-                    break;
-                case "Asia":
-                    continents.asia.push(country);
-                    break;
-                case "Africa":
-                    continents.africa.push(country);
-                    break;
-            }
-        });
-        
-        const sorted = sortAllCountries(continents);
-        //tbd 
-        //  iterate over entire array
-        //  after each group, add divider
-        toHTML(sorted[4]);
+        const continents = groupByContinent(json.response);
+        const sorted = sortingBy(continents,'deaths');
+        toHTML(sorted);
     })
     .catch(err => { 
         console.error(err); 
     }); 
 }
 
-displayCountries('Europe');
+displayCountries();
 showProjectDetails();
