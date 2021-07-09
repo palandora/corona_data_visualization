@@ -102,12 +102,13 @@ body{
         top: -1px;
         background: var(--primary);
         .header{
+            position: relative;
             padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             font-weight: var(--fw_bold);
-            border-bottom: 1px solid var(--divider);
+            //border-bottom: 1px solid var(--divider);
             .pageTitle{
                 width: 50%;
                 display: flex;
@@ -132,6 +133,25 @@ body{
                 .seperator,.currentFilter,.toggle{
                     display: inline-block;
                     margin-left: 4px;
+                }
+                .toggleFilter{
+                    cursor: pointer;
+                    transform: rotate(0deg);
+                    transition: transform .5s;
+                }
+            }
+            .filterPanel{
+                display: none;
+                position: absolute;
+                flex-direction: column;
+                right: 0px;
+                top: 50px;
+                width: 98px;
+                background: var(--primary);
+                .filterItems{
+                    cursor: pointer;
+                    border-top: 1px solid var(--divider);
+                    padding: 16px;
                 }
             }
         }

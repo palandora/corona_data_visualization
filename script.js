@@ -1,6 +1,5 @@
 let TOGGLE_CLICKED = false;
-let DETAILS_EXPANDED = false; 
-
+let FILTER_EXPANDED = false;
 
 
 function groupByContinent(obj){
@@ -69,11 +68,47 @@ function switchTheme(toggle_clicked){
     }
 }
 
+function showFilter(expand){
+    const filterPanel = document.querySelector('.filterPanel');
+    if(expand){
+        filterPanel.style.display = 'flex';
+        toggle.style.transform = 'rotate(90deg)';
+        FILTER_EXPANDED = true;
+    }else{
+        filterPanel.style.display = 'none';
+        toggle.style.transform = 'rotate(0deg)';
+        FILTER_EXPANDED = false;
+    }
+}
+
+function setFilter(){
+    const toggle = document.querySelector('.toggleFilter');
+    toggle.addEventListener('click', ()=>{
+        if(!FILTER_EXPANDED){
+            showFilter(true);
+        }else{
+            showFilter(false);
+        }
+    });
+}
+
+function setNewFilter(){
+    const activeFilter = document.querySelector('.currentFilter').querySelector('.current');
+    const filterItems = document.querySelectorAll('.filterItems');
+    filterItems.forEach((filter)=>{
+        filter.addEventListener('click',()=>{
+            activeFilter.textContent = filter.textContent;
+        });
+    })
+
+}
+
 function showProjectDetails(){
     const toggle = document.querySelector('.toggleDetails');
     const projectDesc = document.querySelector('.details');
-    let isToggled = true;
-    toggle.addEventListener('click', ()=>{
+    let DETAILS_EXPANDED = false; 
+    let state;
+    toggle.addEventListener('click', (event)=>{
         if(!DETAILS_EXPANDED){
             projectDesc.style.display = 'flex';
             toggle.style.transform = 'rotate(90deg)';
@@ -88,7 +123,7 @@ function showProjectDetails(){
 
 function toHTML(array){
     const containerCountries = document.querySelector('.countries');
-    let html;
+    let html = '';
     array.forEach(continent=>{
         html += `<div class="divider">${continent[0].continent}</div>`;
             html += continent.map(country=>{
@@ -138,6 +173,7 @@ function displayCountries(){
         console.error(err); 
     }); 
 }
-
+setFilter();
 displayCountries();
 showProjectDetails();
+
