@@ -86,7 +86,7 @@ function setDate(){
 }
 
 function setRange(number,in_min, in_max){
-    return (number - in_min) * (800 - 0) / (in_max - in_min) + 0;
+    return (number - in_min) * (12200 - 0) / (in_max - in_min) + 0;
 }
 
 function showProjectDetails(){
@@ -129,12 +129,14 @@ function toHTML(array,filter){
                         <span class="countryTitle">${country.country}</span>
                         <div class="wrapperCounter">
                             <span class="labelCounter">${capitalizeFirst(filter)}:</span>
-                            <span class="counter">${country[filter].total}</span>
+                            <span class="counter">${new Intl.NumberFormat('en-GB').format(country[filter].total)}</span>
                         </div>
                     </div>
                 </a>`
             }).join('');
     });
+
+
     containerCountries.innerHTML = html;
 
     //set progressCircle
