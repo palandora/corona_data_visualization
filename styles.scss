@@ -35,6 +35,7 @@ body{
         //HEADER
         --fc_header: var(--fc_headings);
         --div_header: var(--divider);
+        --c_caret: brightness(1);
         //UI
         --primary: #ff9330;
         --bg: #bfbfbf;
@@ -48,7 +49,8 @@ body{
     &.dark{
         //HEADER
         --fc_header: #000;
-        --div_header: rgba(0,0,0,.12);
+        --div_header: rgba(0,0,0,.08);
+        --c_caret: brightness(0);
         //UI
         --primary: #fff;
         --bg: #1d1d1d;
@@ -103,6 +105,9 @@ body{
     margin: 0 auto;
     outline: 1px solid var(--divider);
     nav{
+        &.toggled{
+            background-image: linear-gradient(to right, rgba(0,0,0,0),rgba(0,0,0,0.2));
+        }
         position: sticky;
         z-index: 2;
         top: -1px;
@@ -128,15 +133,14 @@ body{
                     block-size: fit-content;
                 }
                 img[alt="caret"]{
-                    outline: 1px solid lightgreen;
-
+                    filter: var(--c_caret);
                 }
                 .toggleDetails{
                     cursor: pointer;
                     transform: rotate(0deg);
                     transition: transform .5s;
                 }
-                .projectTitle,.country{
+                .projectTitle,.country,img{
                     margin-right: 2px;
                 }
             }
@@ -179,6 +183,45 @@ body{
                 &.left{
                     padding-right: 24px;
                 }
+            }
+        }
+        .deaths{
+            display: none;
+            align-items: center;
+            overflow: scroll;
+            .childDeaths{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 16px 40px;
+                .graph{
+                    //overflow: hidden;
+                    margin: 72px 0;
+                    $dimensions: 80px;
+                    width: $dimensions;
+                    height: $dimensions;
+                    border-radius: $dimensions/2;
+                    .progress{
+                        width: $dimensions;
+                        height: $dimensions;
+                        border-radius: $dimensions/2;
+                        transform: scale(1);
+                        filter: blur(14px);
+                        background: black;
+                    }
+
+                }
+                .label{
+                    .counter{
+                        font-weight: var(--fw_bold);
+                    }
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                }
+
             }
         }
 

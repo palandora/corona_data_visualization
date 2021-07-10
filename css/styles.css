@@ -31,6 +31,7 @@ body {
 body.light {
   --fc_header: var(--fc_headings);
   --div_header: var(--divider);
+  --c_caret: brightness(1);
   --primary: #ff9330;
   --bg: #bfbfbf;
   --bounds_pg: rgba(255,255,255,.2);
@@ -41,7 +42,8 @@ body.light {
 
 body.dark {
   --fc_header: #000;
-  --div_header: rgba(0,0,0,.12);
+  --div_header: rgba(0,0,0,.08);
+  --c_caret: brightness(0);
   --primary: #fff;
   --bg: #1d1d1d;
   --bounds_pg: var(--bg);
@@ -107,6 +109,11 @@ body.dark {
   background: var(--primary);
 }
 
+.wrapper nav.toggled {
+  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.2)));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+}
+
 .wrapper nav .header {
   position: relative;
   padding: 16px;
@@ -146,7 +153,8 @@ body.dark {
 }
 
 .wrapper nav .header .pageTitle img[alt="caret"] {
-  outline: 1px solid lightgreen;
+  -webkit-filter: var(--c_caret);
+          filter: var(--c_caret);
 }
 
 .wrapper nav .header .pageTitle .toggleDetails {
@@ -159,7 +167,7 @@ body.dark {
   transition: transform .5s, -webkit-transform .5s;
 }
 
-.wrapper nav .header .pageTitle .projectTitle, .wrapper nav .header .pageTitle .country {
+.wrapper nav .header .pageTitle .projectTitle, .wrapper nav .header .pageTitle .country, .wrapper nav .header .pageTitle img {
   margin-right: 2px;
 }
 
@@ -220,6 +228,66 @@ body.dark {
 
 .wrapper nav .details .content.left {
   padding-right: 24px;
+}
+
+.wrapper nav .deaths {
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: scroll;
+}
+
+.wrapper nav .deaths .childDeaths {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 16px 40px;
+}
+
+.wrapper nav .deaths .childDeaths .graph {
+  margin: 72px 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+}
+
+.wrapper nav .deaths .childDeaths .graph .progress {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-filter: blur(14px);
+          filter: blur(14px);
+  background: black;
+}
+
+.wrapper nav .deaths .childDeaths .label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper nav .deaths .childDeaths .label .counter {
+  font-weight: var(--fw_bold);
 }
 
 @media screen and (max-width: 650px) {

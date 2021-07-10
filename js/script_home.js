@@ -129,13 +129,14 @@ function toHTML(array,filter){
                         <span class="countryTitle">${country.country}</span>
                         <div class="wrapperCounter">
                             <span class="labelCounter">${capitalizeFirst(filter)}:</span>
-                            <span class="counter">${new Intl.NumberFormat('en-GB').format(country[filter].total)}</span>
+                            <span class="counter">${country[filter].total}</span>
                         </div>
                     </div>
                 </a>`
             }).join('');
     });
 
+    //--> foramtting: new Intl.NumberFormat('en-GB').format(numb)
 
     containerCountries.innerHTML = html;
 
