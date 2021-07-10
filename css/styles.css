@@ -115,6 +115,7 @@ body.dark {
       -ms-flex-align: start;
           align-items: flex-start;
   font-weight: var(--fw_bold);
+  border-bottom: 1px solid var(--divider);
 }
 
 .wrapper nav .header .pageTitle {
@@ -127,6 +128,10 @@ body.dark {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.wrapper nav .header .pageTitle.cf {
+  margin-top: 2px;
 }
 
 .wrapper nav .header .pageTitle .projectTitle {
@@ -238,6 +243,8 @@ body.dark {
 }
 
 .wrapper .countries .country {
+  text-decoration: none;
+  color: white;
   padding: 24px;
   cursor: pointer;
   background: var(--bg);

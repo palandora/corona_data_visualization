@@ -1,4 +1,3 @@
-let TOGGLE_CLICKED = false;
 let FILTER_EXPANDED = false;
 let filterBy = 'deaths';
 
@@ -44,31 +43,6 @@ function sortingBy(array,type){
     return helperArray;
 }
 
-function toggle(){
-    const toggle = document.querySelector('.toggle');
-    toggle.addEventListener('click',()=>{
-        if(!TOGGLE_CLICKED){
-            toggle.classList.add('active');
-            TOGGLE_CLICKED = true;
-            switchTheme(TOGGLE_CLICKED);
-        }else{
-            toggle.classList.remove('active');
-            TOGGLE_CLICKED = false;
-            switchTheme(TOGGLE_CLICKED);
-        }
-    });
-}
-
-function switchTheme(toggle_clicked){
-    if(toggle_clicked){
-        document.body.classList.remove('light');
-        document.body.classList.add('dark');
-    }else{
-        document.body.classList.remove('dark');
-        document.body.classList.add('light');
-    }
-}
-
 function showFilter(expand){
     const toggle = document.querySelector('.toggleFilter');
     const filterPanel = document.querySelector('.filterPanel');
@@ -95,7 +69,7 @@ function setFilter(){
     const filterItem = document.querySelector('.filterItem');
     let nextFilter;
     filterCountriesBy(activeFilter.textContent.toLowerCase());
-    
+
         filterItem.addEventListener('click',()=>{
             nextFilter = activeFilter.textContent;
             activeFilter.textContent = filterItem.textContent;
@@ -141,7 +115,7 @@ function toHTML(array,filter){
         html += `<div class="divider">${continent[0].continent}</div>`;
             html += continent.map(country=>{
                 return `
-                <div class="country">
+                <a href="detail.html" class="country">
                     <div class="graph">
                         <div class="progress"></div>
                     </div>
@@ -152,10 +126,15 @@ function toHTML(array,filter){
                             <span class="counter">${country[filter].total}</span>
                         </div>
                     </div>
-                </div>`
+                </a>`
             }).join('');
     });
     containerCountries.innerHTML = html;
+    const allCountries = document.querySelectorAll('.country');
+    allCountries.forEach((country)=>{
+        const scale = country.querySelector('.counter').textContent*0.00008;
+        country.querySelector('.progress').style.transform = `scale(${scale})`;
+    });
 }
 
 function sortBy(array,continent){

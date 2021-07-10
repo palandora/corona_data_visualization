@@ -108,8 +108,11 @@ body{
             justify-content: space-between;
             align-items: flex-start;
             font-weight: var(--fw_bold);
-            //border-bottom: 1px solid var(--divider);
+            border-bottom: 1px solid var(--divider);
             .pageTitle{
+                &.cf{
+                    margin-top: 2px;
+                }
                 width: 50%;
                 display: flex;
                 align-items: center;
@@ -189,6 +192,8 @@ body{
             grid-column: 1 / -1;
         }
         .country{
+            text-decoration: none;
+            color: white;
             padding: 24px;
             cursor: pointer;
             background: var(--bg);
