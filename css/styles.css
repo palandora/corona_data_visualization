@@ -189,7 +189,7 @@ body.dark {
   background: var(--primary);
 }
 
-.wrapper nav .header .filterPanel .filterItems {
+.wrapper nav .header .filterPanel .filterItem {
   cursor: pointer;
   border-top: 1px solid var(--divider);
   padding: 16px;

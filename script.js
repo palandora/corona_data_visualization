@@ -1,5 +1,6 @@
 let TOGGLE_CLICKED = false;
 let FILTER_EXPANDED = false;
+let filterBy = 'deaths';
 
 
 function groupByContinent(obj){
@@ -69,6 +70,7 @@ function switchTheme(toggle_clicked){
 }
 
 function showFilter(expand){
+    const toggle = document.querySelector('.toggleFilter');
     const filterPanel = document.querySelector('.filterPanel');
     if(expand){
         filterPanel.style.display = 'flex';
@@ -81,26 +83,32 @@ function showFilter(expand){
     }
 }
 
-function setFilter(){
+function toggleFilter(){
     const toggle = document.querySelector('.toggleFilter');
     toggle.addEventListener('click', ()=>{
-        if(!FILTER_EXPANDED){
-            showFilter(true);
-        }else{
-            showFilter(false);
-        }
+        !FILTER_EXPANDED ? showFilter(true) : showFilter(false);
     });
 }
 
-function setNewFilter(){
+function setFilter(){
     const activeFilter = document.querySelector('.currentFilter').querySelector('.current');
-    const filterItems = document.querySelectorAll('.filterItems');
-    filterItems.forEach((filter)=>{
-        filter.addEventListener('click',()=>{
-            activeFilter.textContent = filter.textContent;
+    const filterItem = document.querySelector('.filterItem');
+    let nextFilter;
+    filterCountriesBy(activeFilter.textContent.toLowerCase());
+    
+        filterItem.addEventListener('click',()=>{
+            nextFilter = activeFilter.textContent;
+            activeFilter.textContent = filterItem.textContent;
+            filterCountriesBy(filterItem.textContent.toLowerCase());
+            showFilter(false);
+            filterItem.textContent = nextFilter;
         });
-    })
+}
 
+function setDate(){
+    const html = document.querySelector('.currentDate');
+    const currentDate = new Date();
+    html.textContent = currentDate.toLocaleDateString();
 }
 
 function showProjectDetails(){
@@ -112,6 +120,7 @@ function showProjectDetails(){
         if(!DETAILS_EXPANDED){
             projectDesc.style.display = 'flex';
             toggle.style.transform = 'rotate(90deg)';
+            showFilter(false);
             DETAILS_EXPANDED = true;
         }else{
             projectDesc.style.display = 'none';
@@ -121,7 +130,11 @@ function showProjectDetails(){
     });
 }
 
-function toHTML(array){
+function capitalizeFirst(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function toHTML(array,filter){
     const containerCountries = document.querySelector('.countries');
     let html = '';
     array.forEach(continent=>{
@@ -135,8 +148,8 @@ function toHTML(array){
                     <div class="label">
                         <span class="countryTitle">${country.country}</span>
                         <div class="wrapperCounter">
-                            <span class="labelCounter">Deaths:</span>
-                            <span class="counter">${country.deaths.total}</span>
+                            <span class="labelCounter">${capitalizeFirst(filter)}:</span>
+                            <span class="counter">${country[filter].total}</span>
                         </div>
                     </div>
                 </div>`
@@ -153,7 +166,7 @@ function sortBy(array,continent){
     return sortedArray;
 }
 
-function displayCountries(){
+function filterCountriesBy(filter){
     fetch("https://covid-193.p.rapidapi.com/statistics", { 
         "method": "GET", 
         "headers": { 
@@ -166,14 +179,16 @@ function displayCountries(){
     })
     .then(json =>{
         const continents = groupByContinent(json.response);
-        const sorted = sortingBy(continents,'deaths');
-        toHTML(sorted);
+        const sorted = sortingBy(continents,filter);
+        toHTML(sorted,filter);
     })
     .catch(err => { 
         console.error(err); 
     }); 
 }
+
+setDate();
+toggleFilter();
 setFilter();
-displayCountries();
 showProjectDetails();
 
