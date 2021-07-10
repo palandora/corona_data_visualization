@@ -32,6 +32,9 @@ body{
     }
     color: var(--fc_headings);
     &.light{
+        //HEADER
+        --fc_header: var(--fc_headings);
+        --div_header: var(--divider);
         //UI
         --primary: #ff9330;
         --bg: #bfbfbf;
@@ -43,6 +46,9 @@ body{
         --deaths_total: #000;
     }
     &.dark{
+        //HEADER
+        --fc_header: #000;
+        --div_header: rgba(0,0,0,.12);
         //UI
         --primary: #fff;
         --bg: #1d1d1d;
@@ -100,6 +106,7 @@ body{
         position: sticky;
         z-index: 2;
         top: -1px;
+        color: var(--fc_header);
         background: var(--primary);
         .header{
             position: relative;
@@ -108,7 +115,7 @@ body{
             justify-content: space-between;
             align-items: flex-start;
             font-weight: var(--fw_bold);
-            border-bottom: 1px solid var(--divider);
+            border-bottom: 1px solid var(--div_header);
             .pageTitle{
                 &.cf{
                     margin-top: 2px;
@@ -119,6 +126,10 @@ body{
                 flex-wrap: wrap;
                 .projectTitle{
                     block-size: fit-content;
+                }
+                img[alt="caret"]{
+                    outline: 1px solid lightgreen;
+
                 }
                 .toggleDetails{
                     cursor: pointer;

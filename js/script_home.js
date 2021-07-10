@@ -85,6 +85,10 @@ function setDate(){
     html.textContent = currentDate.toLocaleDateString();
 }
 
+function setRange(number,in_min, in_max){
+    return (number - in_min) * (800 - 0) / (in_max - in_min) + 0;
+}
+
 function showProjectDetails(){
     const toggle = document.querySelector('.toggleDetails');
     const projectDesc = document.querySelector('.details');
@@ -110,8 +114,10 @@ function capitalizeFirst(str){
 
 function toHTML(array,filter){
     const containerCountries = document.querySelector('.countries');
+    let maxNumbers = [];
     let html = '';
     array.forEach(continent=>{
+        maxNumbers.push(continent[0][filter].total);
         html += `<div class="divider">${continent[0].continent}</div>`;
             html += continent.map(country=>{
                 return `
@@ -130,10 +136,13 @@ function toHTML(array,filter){
             }).join('');
     });
     containerCountries.innerHTML = html;
+
+    //set progressCircle
     const allCountries = document.querySelectorAll('.country');
     allCountries.forEach((country)=>{
-        const scale = country.querySelector('.counter').textContent*0.00008;
-        country.querySelector('.progress').style.transform = `scale(${scale})`;
+        const defaultSize = country.querySelector('.counter').textContent;
+        const scale = setRange(defaultSize,0, Math.max(...maxNumbers));
+        country.querySelector('.progress').style.transform = `scale(${scale}%)`;
     });
 }
 

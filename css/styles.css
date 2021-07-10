@@ -29,6 +29,8 @@ body {
 }
 
 body.light {
+  --fc_header: var(--fc_headings);
+  --div_header: var(--divider);
   --primary: #ff9330;
   --bg: #bfbfbf;
   --bounds_pg: rgba(255,255,255,.2);
@@ -38,6 +40,8 @@ body.light {
 }
 
 body.dark {
+  --fc_header: #000;
+  --div_header: rgba(0,0,0,.12);
   --primary: #fff;
   --bg: #1d1d1d;
   --bounds_pg: var(--bg);
@@ -99,6 +103,7 @@ body.dark {
   position: sticky;
   z-index: 2;
   top: -1px;
+  color: var(--fc_header);
   background: var(--primary);
 }
 
@@ -115,7 +120,7 @@ body.dark {
       -ms-flex-align: start;
           align-items: flex-start;
   font-weight: var(--fw_bold);
-  border-bottom: 1px solid var(--divider);
+  border-bottom: 1px solid var(--div_header);
 }
 
 .wrapper nav .header .pageTitle {
@@ -138,6 +143,10 @@ body.dark {
   block-size: -webkit-fit-content;
   block-size: -moz-fit-content;
   block-size: fit-content;
+}
+
+.wrapper nav .header .pageTitle img[alt="caret"] {
+  outline: 1px solid lightgreen;
 }
 
 .wrapper nav .header .pageTitle .toggleDetails {
