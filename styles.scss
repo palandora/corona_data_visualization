@@ -244,35 +244,6 @@ body{
 
             }
         }
-        .titleBar{
-
-            display: flex;
-            justify-content: flex-start;
-            overflow-y: scroll;
-            .container{
-                min-width: 750px;
-                display: flex;
-                align-items:center;
-                justify-content: flex-start;
-                flex-grow: 1;
-                background: var(--bg);
-                color: var(--fc_headings);
-                .t_cases{
-                    padding: 16px;
-                    display: flex;
-                    flex-grow: 5;
-                    align-items: center;
-                    justify-content: space-between;
-                    border-right: 1px solid var(--divider);
-                }
-                .t_deaths{
-                    flex-grow: 1;
-                    display: flex;
-                    padding: 16px;
-                    justify-content: space-between;
-                }
-            }
-        }
 
         @media screen and (max-width: 650px) {
             .details {
@@ -322,21 +293,55 @@ body{
         }
     }
 
+
     .history{
-        outline: 1px solid salmon;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         overflow-y: scroll;
-        height: 400px;
-        .day{
+        .titleBar{
             display: flex;
+            //justify-content: flex-start;
+            overflow-y: scroll;
+            border-bottom: 1px solid var(--divider);
+            .container{
+                min-width: 750px;
+                display: flex;
+                align-items:center;
+                justify-content: flex-start;
+                flex-grow: 1;
+                background: var(--bg);
+                color: var(--fc_headings);
+                .t_cases{
+                    padding: 16px;
+                    display: flex;
+                    flex-grow: 5;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-right: 1px solid var(--divider);
+                }
+                .t_deaths{
+                    flex-grow: 1;
+                    display: flex;
+                    padding: 16px;
+                    justify-content: space-between;
+                }
+            }
+        }
+        .day{
+            min-width: 750px;
+            display: flex;
+            align-items:center;
             justify-content: flex-start;
             flex-grow: 1;
-            min-width: 750px;
+            border-bottom: 1px solid var(--divider);
             .cases{
+                flex-grow: 4;
+                display: flex;
+                border-right: 1px solid var(--divider);
                 .case_item{
+                    padding: 16px 24px;
                     display: flex;
+                    flex-grow: 1;
                     flex-direction: column;
                     align-items: center;
                     @include setProgressInd;
@@ -344,7 +349,23 @@ body{
                         margin-top: 8px;
                     }
                 }
-                
+            }
+            .deaths{
+                flex-grow: 1;
+                display: flex;
+                .death_item{
+                    padding: 16px 24px;
+                    display: flex;
+                    flex-grow: 1;
+                    flex-direction: column;
+                    align-items: center;
+                    @include setProgressInd;
+                    .counter{
+                        margin-top: 8px;
+                    }
+
+                }
+
             }
         }
     }
