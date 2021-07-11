@@ -21,6 +21,25 @@
     margin: 0;
 }
 
+@mixin setProgressInd {
+    .graph{
+        overflow: hidden;
+        $dimensions: 80px;
+        background: var(--bounds_pg);
+        width: $dimensions;
+        height: $dimensions;
+        border-radius: $dimensions/2;
+        .progress{
+            width: $dimensions;
+            height: $dimensions;
+            border-radius: $dimensions/2;
+            transform: scale(.5);
+            filter: blur(14px);
+            background: var(--primary);
+        }
+    }
+}
+
 body{
     height: 100vh;
     background: var(--bg);
@@ -226,6 +245,7 @@ body{
             }
         }
         .titleBar{
+
             display: flex;
             justify-content: flex-start;
             overflow-y: scroll;
@@ -285,22 +305,7 @@ body{
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            .graph{
-                overflow: hidden;
-                $dimensions: 80px;
-                background: var(--bounds_pg);
-                width: $dimensions;
-                height: $dimensions;
-                border-radius: $dimensions/2;
-                .progress{
-                    width: $dimensions;
-                    height: $dimensions;
-                    border-radius: $dimensions/2;
-                    transform: scale(.5);
-                    filter: blur(14px);
-                    background: var(--primary);
-                }
-            }
+            @include setProgressInd;
             .label{
                 margin-top: 8px;
                 display: flex;
@@ -316,6 +321,34 @@ body{
             }
         }
     }
+
+    .history{
+        outline: 1px solid salmon;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        overflow-y: scroll;
+        height: 400px;
+        .day{
+            display: flex;
+            justify-content: flex-start;
+            flex-grow: 1;
+            min-width: 750px;
+            .cases{
+                .case_item{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    @include setProgressInd;
+                    .counter{
+                        margin-top: 8px;
+                    }
+                }
+                
+            }
+        }
+    }
+
     footer{
         padding: 16px;
         display: flex;
