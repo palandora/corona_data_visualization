@@ -14,7 +14,7 @@
                 <div class="pageTitle cf">
                     <span class="projectTitle">Corona Datavisualization</span>
                     <img src="assets/ic_caret_right.svg" alt="caret">
-                    <span class="projectTitle">Country</span>
+                    <span class="countryTitle">Country</span>
                 </div>
                 <div class="filter">
                     <span class="label">Show deaths per Month</span>
@@ -50,8 +50,6 @@
                     </div>
                 </div>
             </div>
-        </nav>
-        <div class="history">
             <div class="titleBar">
                 <div class="container">
                     <div class="t_cases">
@@ -67,59 +65,72 @@
                     </div>
                 </div>
             </div>
-
+        </nav>
+        <div class="history">
             <div class="day">
                 <div class="cases">
-                    <div class="case_item">
+                    <div class="child" id="cases_new">
                         <div class="graph">
-                            <div class="progress" id="pg_cases_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_cases_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-                    <div class="case_item">
+                    <div class="child" id="cases_active">
                         <div class="graph">
-                            <div class="progress" id="pg_cases_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_cases_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-                    <div class="case_item">
+                    <div class="child" id="cases_critical">
                         <div class="graph">
-                            <div class="progress" id="pg_cases_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_cases_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-                    <div class="case_item">
+                    <div class="child" id="cases_recovered">
                         <div class="graph">
-                            <div class="progress" id="pg_cases_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_cases_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-                    <div class="case_item">
+                    <div class="child" id="cases_total">
                         <div class="graph">
-                            <div class="progress" id="pg_cases_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_cases_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-                    
-
                 </div>
                 <div class="deaths">
-                    <div class="death_item">
+                    <div class="child" id="deaths_new">
                         <div class="graph">
-                            <div class="progress" id="pg_deaths_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_deaths_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-                    <div class="death_item">
+                    <div class="child" id="deaths_total">
                         <div class="graph">
-                            <div class="progress" id="pg_deaths_new"></div>
+                            <div class="progress"></div>
                         </div>
-                        <div class="counter" id="c_deaths_new">2340</div>
+                        <div class="label">
+                            3
+                        </div>
                     </div>
-
                 </div>
+                    
+                
             </div>
-            
         </div>
     </div>
     <script src="js/script_detail_page.js"></script>

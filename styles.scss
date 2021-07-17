@@ -7,7 +7,7 @@
     --fc_headings: #fff;
     --fc_captions: rgba(255,255,255,.64);
     //UI
-    --divider: rgba(255,255,255,.16);
+    //--divider: #cccccc;
     --hover: rgba(255,255,255,.12);
     //CASES
     --cases_new: #fff730;
@@ -21,7 +21,7 @@
     margin: 0;
 }
 
-@mixin setProgressInd {
+@mixin setProgressInd($col) {
     .graph{
         overflow: hidden;
         $dimensions: 80px;
@@ -35,7 +35,7 @@
             border-radius: $dimensions/2;
             transform: scale(.5);
             filter: blur(14px);
-            background: var(--primary);
+            background: $col;
         }
     }
 }
@@ -56,6 +56,7 @@ body{
         --div_header: var(--divider);
         --c_caret: brightness(1);
         //UI
+        --divider: #cccccc;
         --primary: #ff9330;
         --bg: #bfbfbf;
         --bounds_pg: rgba(255,255,255,.2);
@@ -71,9 +72,10 @@ body{
         --div_header: rgba(0,0,0,.08);
         --c_caret: brightness(0);
         //UI
+        --divider: #242424;
         --primary: #fff;
         --bg: #1d1d1d;
-        --bounds_pg: var(--bg);
+        --bounds_pg: rgba(255,255,255,.02);
         //CASES
         --cases_total: rgba(255,255,255,.32);
         //DEATHS
@@ -230,7 +232,6 @@ body{
                         filter: blur(14px);
                         background: black;
                     }
-
                 }
                 .label{
                     .counter{
@@ -244,6 +245,40 @@ body{
 
             }
         }
+        .titleBar{
+            display: flex;
+            justify-content: flex-start;
+            overflow-y: scroll;
+            border-bottom: 1px solid var(--divider);
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .container{
+                min-width: 850px;
+                display: flex;
+                align-items:center;
+                justify-content: flex-start;
+                flex-grow: 1;
+                background: var(--bg);
+                color: var(--fc_headings);
+                .t_cases{
+                    padding: 16px;
+                    display: flex;
+                    flex-grow: 4;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-right: 1px solid var(--divider);
+                }
+                .t_deaths{
+                    flex-grow: 1;
+                    display: flex;
+                    padding: 16px;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+
 
         @media screen and (max-width: 650px) {
             .details {
@@ -276,7 +311,7 @@ body{
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            @include setProgressInd;
+            @include setProgressInd(var(--primary));
             .label{
                 margin-top: 8px;
                 display: flex;
@@ -293,80 +328,53 @@ body{
         }
     }
 
-
     .history{
+        overflow-y: scroll;
         display: flex;
         flex-direction: column;
-        overflow-y: scroll;
-        .titleBar{
+        align-items: stretch;
+        .day{
             display: flex;
-            //justify-content: flex-start;
-            overflow-y: scroll;
-            border-bottom: 1px solid var(--divider);
-            .container{
-                min-width: 750px;
+            flex-grow: 1;
+            justify-content: flex-start;
+            min-width: 850px;
+            .cases, .deaths{
+                padding: 16px;
                 display: flex;
-                align-items:center;
-                justify-content: flex-start;
-                flex-grow: 1;
-                background: var(--bg);
-                color: var(--fc_headings);
-                .t_cases{
-                    padding: 16px;
-                    display: flex;
-                    flex-grow: 5;
-                    align-items: center;
-                    justify-content: space-between;
-                    border-right: 1px solid var(--divider);
-                }
-                .t_deaths{
-                    flex-grow: 1;
-                    display: flex;
-                    padding: 16px;
-                    justify-content: space-between;
+                justify-content: space-between;
+            }
+            .cases .child, .deaths .child{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                @include setProgressInd(var(--primary));
+                .label{
+                    margin-top: 8px;
                 }
             }
-        }
-        .day{
-            min-width: 750px;
-            display: flex;
-            align-items:center;
-            justify-content: flex-start;
-            flex-grow: 1;
-            border-bottom: 1px solid var(--divider);
             .cases{
-                flex-grow: 4;
-                display: flex;
+                flex-grow: 4.2;
                 border-right: 1px solid var(--divider);
-                .case_item{
-                    padding: 16px 24px;
-                    display: flex;
-                    flex-grow: 1;
-                    flex-direction: column;
-                    align-items: center;
-                    @include setProgressInd;
-                    .counter{
-                        margin-top: 8px;
-                    }
-                }
             }
             .deaths{
                 flex-grow: 1;
-                display: flex;
-                .death_item{
-                    padding: 16px 24px;
-                    display: flex;
-                    flex-grow: 1;
-                    flex-direction: column;
-                    align-items: center;
-                    @include setProgressInd;
-                    .counter{
-                        margin-top: 8px;
-                    }
-
-                }
-
             }
+            #cases_new .progress{
+                background: var(--cases_new);
+            }
+            #cases_active .progress{
+                background: var(--cases_active);
+            }
+            #cases_critical .progress{
+                background: var(--cases_critical);
+            }
+            #cases_recovered .progress{
+                background: var(--cases_recovered);
+            }
+            #cases_total .progress{
+                display: none;
+            }
+                
         }
     }
 

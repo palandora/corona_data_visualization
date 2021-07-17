@@ -121,7 +121,7 @@ function toHTML(array,filter){
         html += `<div class="divider">${continent[0].continent}</div>`;
             html += continent.map(country=>{
                 return `
-                <a href="detail.html" class="country">
+                <div href="detail.html" class="country">
                     <div class="graph">
                         <div class="progress"></div>
                     </div>
@@ -132,7 +132,7 @@ function toHTML(array,filter){
                             <span class="counter">${country[filter].total}</span>
                         </div>
                     </div>
-                </a>`
+                </div>`
             }).join('');
     });
 
@@ -178,8 +178,37 @@ function filterCountriesBy(filter){
     }); 
 }
 
+function loadDetailPage() {
+    var selector = '.country';
+    document.addEventListener('click', function(e) {
+        var el = e.target;
+        if (!el.matches(selector)) {
+        return;
+        }
+        
+        const countryName = el.querySelector('.countryTitle').textContent;
+        localStorage.setItem('country',countryName);
+        window.document.location = 'detail.html';
+    });
+}
+
 setDate();
 toggleFilter();
 setFilter();
 showProjectDetails();
+
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    loadDetailPage();
+});
+
+
+
+
+
+
+
+  
+
+
 

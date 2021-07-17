@@ -4,7 +4,6 @@
   --fw_bold: 700;
   --fc_headings: #fff;
   --fc_captions: rgba(255,255,255,.64);
-  --divider: rgba(255,255,255,.16);
   --hover: rgba(255,255,255,.12);
   --cases_new: #fff730;
   --cases_active: #ff9330;
@@ -32,6 +31,7 @@ body.light {
   --fc_header: var(--fc_headings);
   --div_header: var(--divider);
   --c_caret: brightness(1);
+  --divider: #cccccc;
   --primary: #ff9330;
   --bg: #bfbfbf;
   --bounds_pg: rgba(255,255,255,.2);
@@ -44,9 +44,10 @@ body.dark {
   --fc_header: #000;
   --div_header: rgba(0,0,0,.08);
   --c_caret: brightness(0);
+  --divider: #242424;
   --primary: #fff;
   --bg: #1d1d1d;
-  --bounds_pg: var(--bg);
+  --bounds_pg: rgba(255,255,255,.02);
   --cases_total: rgba(255,255,255,.32);
   --deaths_new: #fff;
   --deaths_total: #fff;
@@ -290,6 +291,69 @@ body.dark {
   font-weight: var(--fw_bold);
 }
 
+.wrapper nav .titleBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  overflow-y: scroll;
+  border-bottom: 1px solid var(--divider);
+}
+
+.wrapper nav .titleBar::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper nav .titleBar .container {
+  min-width: 850px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  background: var(--bg);
+  color: var(--fc_headings);
+}
+
+.wrapper nav .titleBar .container .t_cases {
+  padding: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 4;
+      -ms-flex-positive: 4;
+          flex-grow: 4;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-right: 1px solid var(--divider);
+}
+
+.wrapper nav .titleBar .container .t_deaths {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 16px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 @media screen and (max-width: 650px) {
   .wrapper nav .details {
     -webkit-box-orient: vertical;
@@ -386,6 +450,7 @@ body.dark {
 }
 
 .wrapper .history {
+  overflow-y: scroll;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -393,100 +458,38 @@ body.dark {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  overflow-y: scroll;
-}
-
-.wrapper .history .titleBar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  overflow-y: scroll;
-  border-bottom: 1px solid var(--divider);
-}
-
-.wrapper .history .titleBar .container {
-  min-width: 750px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  background: var(--bg);
-  color: var(--fc_headings);
-}
-
-.wrapper .history .titleBar .container .t_cases {
-  padding: 16px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 5;
-      -ms-flex-positive: 5;
-          flex-grow: 5;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  border-right: 1px solid var(--divider);
-}
-
-.wrapper .history .titleBar .container .t_deaths {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 16px;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 }
 
 .wrapper .history .day {
-  min-width: 750px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  border-bottom: 1px solid var(--divider);
+  min-width: 850px;
 }
 
-.wrapper .history .day .cases {
-  -webkit-box-flex: 4;
-      -ms-flex-positive: 4;
-          flex-grow: 4;
+.wrapper .history .day .cases, .wrapper .history .day .deaths {
+  padding: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border-right: 1px solid var(--divider);
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.wrapper .history .day .cases .case_item {
-  padding: 16px 24px;
+.wrapper .history .day .cases .child, .wrapper .history .day .deaths .child {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -496,7 +499,7 @@ body.dark {
           align-items: center;
 }
 
-.wrapper .history .day .cases .case_item .graph {
+.wrapper .history .day .cases .child .graph, .wrapper .history .day .deaths .child .graph {
   overflow: hidden;
   background: var(--bounds_pg);
   width: 80px;
@@ -504,7 +507,7 @@ body.dark {
   border-radius: 40px;
 }
 
-.wrapper .history .day .cases .case_item .graph .progress {
+.wrapper .history .day .cases .child .graph .progress, .wrapper .history .day .deaths .child .graph .progress {
   width: 80px;
   height: 80px;
   border-radius: 40px;
@@ -515,57 +518,41 @@ body.dark {
   background: var(--primary);
 }
 
-.wrapper .history .day .cases .case_item .counter {
+.wrapper .history .day .cases .child .label, .wrapper .history .day .deaths .child .label {
   margin-top: 8px;
+}
+
+.wrapper .history .day .cases {
+  -webkit-box-flex: 4.2;
+      -ms-flex-positive: 4.2;
+          flex-grow: 4.2;
+  border-right: 1px solid var(--divider);
 }
 
 .wrapper .history .day .deaths {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
-.wrapper .history .day .deaths .death_item {
-  padding: 16px 24px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.wrapper .history .day #cases_new .progress {
+  background: var(--cases_new);
 }
 
-.wrapper .history .day .deaths .death_item .graph {
-  overflow: hidden;
-  background: var(--bounds_pg);
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
+.wrapper .history .day #cases_active .progress {
+  background: var(--cases_active);
 }
 
-.wrapper .history .day .deaths .death_item .graph .progress {
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
-  -webkit-transform: scale(0.5);
-          transform: scale(0.5);
-  -webkit-filter: blur(14px);
-          filter: blur(14px);
-  background: var(--primary);
+.wrapper .history .day #cases_critical .progress {
+  background: var(--cases_critical);
 }
 
-.wrapper .history .day .deaths .death_item .counter {
-  margin-top: 8px;
+.wrapper .history .day #cases_recovered .progress {
+  background: var(--cases_recovered);
+}
+
+.wrapper .history .day #cases_total .progress {
+  display: none;
 }
 
 .wrapper footer {

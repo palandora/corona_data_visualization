@@ -39,4 +39,42 @@ function toggleDeaths(toggle){
     }
 }
 
+function snychronizeScroll(){
+    let isSyncingLeftScroll = false;
+    let isSyncingRightScroll = false;
+    let titleBar = document.querySelector('.titleBar'); 
+    let history = document.querySelector('.history'); 
+
+    titleBar.addEventListener('scroll',()=>{
+        if (!isSyncingLeftScroll) {
+            isSyncingRightScroll = true;
+            history.scrollLeft = titleBar.scrollLeft;
+        }
+        isSyncingLeftScroll = false;
+    });
+    history.addEventListener('scroll',()=>{
+        if (!isSyncingRightScroll) {
+            isSyncingLeftScroll = true;
+            titleBar.scrollLeft = history.scrollLeft;
+        }
+        isSyncingRightScroll = false;
+    });
+}
+
+function fetchData(){
+    
+}
+
+function loadPageContent(){
+    const countryName = localStorage.getItem('country');
+    const pageTitle = document.querySelector('.countryTitle');
+    pageTitle.textContent = countryName;
+
+
+}
+
+
+
 toggle();
+snychronizeScroll();
+loadPageContent();
