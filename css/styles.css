@@ -240,6 +240,7 @@ body.dark {
 }
 
 .wrapper nav .deaths .childDeaths {
+  min-width: 180px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -560,7 +561,8 @@ body.dark {
   display: -ms-flexbox;
   display: flex;
   padding: 16px;
-  border-top: 1px solid var(--divider);
+  min-width: 850px;
+  outline: 1px solid var(--divider);
 }
 
 .wrapper footer {

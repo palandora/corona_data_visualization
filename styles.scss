@@ -212,6 +212,7 @@ body{
             display: none;
             align-items: center;
             .childDeaths{
+                min-width: 180px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -379,7 +380,8 @@ body{
         .date_div{
             display: flex;
             padding: 16px;
-            border-top: 1px solid var(--divider);
+            min-width: 850px;
+            outline: 1px solid var(--divider);
         }
         
     }

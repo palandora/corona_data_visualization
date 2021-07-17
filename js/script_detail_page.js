@@ -77,21 +77,39 @@ function fetchHistData(countryName,callback){
     .then(res => {return res.json()})
     .then(json => {
         const data = json.response;
-        if(data.length > 40) data.length = 40;
+        if(data.length > 350) data.length = 350;
         callback(data);
     })
     .catch(err => {console.error(err)})
 }
 
 function toHTML(json){
-    let html = '';
+    let htmlHistory = '';
+    let htmlDeaths = '';
     let daysSorted = [];
+    let daysStartOfMonth = [];
     const containerDays = document.querySelector('.history');
+    const containerDeaths = document.querySelector('.deaths');
+
     for(let i=0;i<json.length-1;i++){
         if(json[i].day!=json[i+1].day){
             daysSorted.push(json[i]);
-            if(json[i].deaths.new == null) json[i].deaths.new = "0" ;
-            html += `
+            if(json[i].deaths.new == null) json[i].deaths.new = "0";
+            if(json[i].day.slice(8, 13)==1){
+                daysStartOfMonth.push(json[i]);
+                htmlDeaths+= `
+                <div class="childDeaths">
+                    <div class="graph">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="label">
+                        <span class="counter">${formatNumber(json[i].deaths.total)}</span>
+                        <span class="date">${json[i].day}</span>
+                    </div>
+                </div>
+                `
+            }
+            htmlHistory += `
             <div class="date_div">
                 ${json[i].day}
             </div>
@@ -160,8 +178,10 @@ function toHTML(json){
             `
         }
     }
-    containerDays.innerHTML = html;
+    containerDays.innerHTML = htmlHistory;
+    containerDeaths.innerHTML = htmlDeaths;
 
+    //set progress for history
     const days = document.querySelectorAll('.day');
     let index = 0;
     const SCALE = 0.0045;
@@ -175,9 +195,19 @@ function toHTML(json){
         day.querySelector('#pg_cases_total').style.transform = `scale(${cases.total*SCALE}%)`;
         day.querySelector('#pg_deaths_new').style.transform = `scale(${deaths.new*SCALE}%)`;
         day.querySelector('#pg_deaths_total').style.transform = `scale(${deaths.total*SCALE}%)`;
-        
         index++;
     });
+    //set progress for deaths
+    const deaths = document.querySelectorAll('.childDeaths');
+    let iterator = 0;
+    deaths.forEach(death=>{
+        const deaths = daysStartOfMonth[iterator].deaths;
+        death.querySelector('.progress').style.transform = `scale(${deaths.total*0.00095}%)`;
+        iterator++;
+    });
+
+
+
 }
 
 function loadPageContent(){
