@@ -62,6 +62,10 @@ function snychronizeScroll(){
     });
 }
 
+function formatNumber(number){
+    return new Intl.NumberFormat('en-GB').format(number);
+}
+
 function fetchHistData(countryName,callback){
     fetch(`https://covid-193.p.rapidapi.com/history?country=${countryName}`, { 
         "method": "GET", 
@@ -73,7 +77,7 @@ function fetchHistData(countryName,callback){
     .then(res => {return res.json()})
     .then(json => {
         const data = json.response;
-        if(data.length > 120) data.length = 120;
+        if(data.length > 40) data.length = 40;
         callback(data);
     })
     .catch(err => {console.error(err)})
@@ -81,70 +85,74 @@ function fetchHistData(countryName,callback){
 
 function toHTML(json){
     let html = '';
+    let daysSorted = [];
     const containerDays = document.querySelector('.history');
     for(let i=0;i<json.length-1;i++){
         if(json[i].day!=json[i+1].day){
-            if(json[i].deaths.new == null) json[i].deaths.new = "0" 
-            console.log(json[i].deaths.new)
+            daysSorted.push(json[i]);
+            if(json[i].deaths.new == null) json[i].deaths.new = "0" ;
             html += `
+            <div class="date_div">
+                ${json[i].day}
+            </div>
             <div class="day">
                 <div class="cases">
                     <div class="child" id="cases_new">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_cases_new"></div>
                         </div>
                         <div class="label">
-                            ${json[i].cases.new}
+                            ${formatNumber(json[i].cases.new)}
                         </div>
                     </div>
                     <div class="child" id="cases_active">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_cases_active"></div>
                         </div>
                         <div class="label">
-                            ${json[i].cases.active}
+                            ${formatNumber(json[i].cases.active)}
                         </div>
                     </div>
                     <div class="child" id="cases_critical">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_cases_critical"></div>
                         </div>
                         <div class="label">
-                            ${json[i].cases.critical}
+                            ${formatNumber(json[i].cases.critical)}
                         </div>
                     </div>
                     <div class="child" id="cases_recovered">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_cases_recovered"></div>
                         </div>
                         <div class="label">
-                            ${json[i].cases.recovered}
+                            ${formatNumber(json[i].cases.recovered)}
                         </div>
                     </div>
                     <div class="child" id="cases_total">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_cases_total"></div>
                         </div>
                         <div class="label">
-                            ${json[i].cases.total}
+                            ${formatNumber(json[i].cases.total)}
                         </div>
                     </div>
                 </div>
                 <div class="deaths">
                     <div class="child" id="deaths_new">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_deaths_new"></div>
                         </div>
                         <div class="label">
-                            ${json[i].deaths.new}
+                            ${formatNumber(json[i].deaths.new)}
                         </div>
                     </div>
                     <div class="child" id="deaths_total">
                         <div class="graph">
-                            <div class="progress"></div>
+                            <div class="progress" id="pg_deaths_total"></div>
                         </div>
                         <div class="label">
-                            ${json[i].deaths.total}
+                            ${formatNumber(json[i].deaths.total)}
                         </div>
                     </div>
                 </div> 
@@ -154,8 +162,22 @@ function toHTML(json){
     }
     containerDays.innerHTML = html;
 
-
-    
+    const days = document.querySelectorAll('.day');
+    let index = 0;
+    const SCALE = 0.0045;
+    days.forEach((day)=>{
+        const cases = daysSorted[index].cases;
+        const deaths = daysSorted[index].deaths;
+        day.querySelector('#pg_cases_new').style.transform = `scale(${cases.new*SCALE}%)`;
+        day.querySelector('#pg_cases_active').style.transform = `scale(${cases.active*SCALE}%)`;
+        day.querySelector('#pg_cases_critical').style.transform = `scale(${cases.critical*SCALE}%)`;
+        day.querySelector('#pg_cases_recovered').style.transform = `scale(${cases.recovered*SCALE}%)`;
+        day.querySelector('#pg_cases_total').style.transform = `scale(${cases.total*SCALE}%)`;
+        day.querySelector('#pg_deaths_new').style.transform = `scale(${deaths.new*SCALE}%)`;
+        day.querySelector('#pg_deaths_total').style.transform = `scale(${deaths.total*SCALE}%)`;
+        
+        index++;
+    });
 }
 
 function loadPageContent(){
@@ -166,13 +188,6 @@ function loadPageContent(){
     fetchHistData(countryName,toHTML)
 
 }
-
-
-
-
-
-
-
 
 
 

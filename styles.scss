@@ -376,6 +376,12 @@ body{
             }
                 
         }
+        .date_div{
+            display: flex;
+            padding: 16px;
+            border-top: 1px solid var(--divider);
+        }
+        
     }
 
     footer{
